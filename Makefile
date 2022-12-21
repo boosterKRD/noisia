@@ -34,10 +34,10 @@ build: dep ## Build
 	CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o bin/${APPNAME} ./cmd
 
 docker-build: ## Build docker image
-	docker build -t lesovsky/${APPNAME}:${TAG} .
+	docker build -t boosterkrd/${APPNAME}:${TAG} .
 	docker image prune --force --filter label=stage=intermediate
-	docker tag lesovsky/${APPNAME}:${TAG} lesovsky/${APPNAME}:latest
+	docker tag boosterkrd/${APPNAME}:${TAG} boosterkrd/${APPNAME}:latest
 
 docker-push: ## Push docker image to the registry
-	docker push lesovsky/${APPNAME}:${TAG}
-	docker push lesovsky/${APPNAME}:latest
+	docker push boosterkrd/${APPNAME}:${TAG}
+	docker push boosterkrd/${APPNAME}:latest

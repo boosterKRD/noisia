@@ -27,8 +27,8 @@ Check out [releases](https://github.com/lesovsky/noisia/releases) page.
  
 #### Using Docker
 ```shell script
-docker pull lesovsky/noisia:latest
-docker run --rm -ti lesovsky/noisia:latest noisia --help
+docker pull boosterkrd/noisia:latest
+docker run --rm -ti boosterkrd/noisia:latest noisia --help
 ```
 
 #### Using in your own code
@@ -40,7 +40,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/lesovsky/noisia/waitxacts"
+	"github.com/boosterkrd/noisia/waitxacts"
 	"github.com/rs/zerolog"
 	"log"
 	"os"
@@ -89,8 +89,11 @@ Running workloads could impact on already running workload produced by other app
 
 #### Contribution
 - PR's are welcome.
-- Ideas could be proposed [here](https://github.com/lesovsky/noisia/discussions)
-- About grammar issues or typos let me know [here](https://github.com/lesovsky/noisia/discussions/8).
+- Ideas could be proposed [here](https://github.com/boosterkrd/noisia/discussions)
+- About grammar issues or typos let me know [here](https://github.com/boosterkrd/noisia/discussions/8).
 
 #### License
 BSD-3. See [LICENSE](LICENSE) for more details.
+
+#### MY DOCS
+-  https://booster-krd.atlassian.net/wiki/spaces/HOWTO/pages/122585089/noisia
