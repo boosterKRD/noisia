@@ -22,7 +22,9 @@ dep: ## Get the dependencies
 	go mod download
 
 lint: ## Lint the source files
-	golangci-lint run --timeout 5m -E golint -e '(method|func) [a-zA-Z]+ should be [a-zA-Z]+'
+#	golangci-lint run --timeout 5m -E golint -e '(method|func) [a-zA-Z]+ should be [a-zA-Z]+'
+#	https://staticcheck.io/docs/getting-started/
+	staticcheck ./...
 
 test: dep ## Run tests
 	go test -race -timeout 300s -coverprofile=.test_coverage.txt ./... && \
@@ -34,7 +36,7 @@ build: dep ## Build
 	CGO_ENABLED=0 GOOS=linux GOARCH=${GOARCH} go build ${LDFLAGS} -o bin/${APPNAME} ./cmd
 
 docker-build: ## Build docker image
-	docker build -t boosterkrd/${APPNAME}:${TAG} .
+	docker build --build-arg noisia_my_msg="It's my TEXT" -t boosterkrd/${APPNAME}:${TAG} .
 	docker image prune --force --filter label=stage=intermediate
 	docker tag boosterkrd/${APPNAME}:${TAG} boosterkrd/${APPNAME}:latest
 

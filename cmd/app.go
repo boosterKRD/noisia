@@ -2,6 +2,9 @@ package main
 
 import (
 	"context"
+	"sync"
+	"time"
+
 	"github.com/lesovsky/noisia/deadlocks"
 	"github.com/lesovsky/noisia/failconns"
 	"github.com/lesovsky/noisia/forkconns"
@@ -11,8 +14,6 @@ import (
 	"github.com/lesovsky/noisia/tempfiles"
 	"github.com/lesovsky/noisia/terminate"
 	"github.com/lesovsky/noisia/waitxacts"
-	"sync"
-	"time"
 )
 
 type config struct {
@@ -44,6 +45,7 @@ type config struct {
 	failconns             bool
 	forkconns             bool
 	forkconnsRate         uint16
+	myExtendMsg           string
 }
 
 func runApplication(ctx context.Context, c config, log log.Logger) error {

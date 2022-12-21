@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/lesovsky/noisia/log"
-	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
 	"os/signal"
 	"sync"
 	"syscall"
+
+	"github.com/lesovsky/noisia/log"
+	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var (
@@ -46,6 +47,7 @@ func main() {
 		failconns             = kingpin.Flag("failconns", "Run connections exhaustion workload").Default("false").Envar("NOISIA_FAILCONNS").Bool()
 		forkconns             = kingpin.Flag("forkconns", "Run queries in dedicated connections").Default("false").Envar("NOISIA_FORKCONNS").Bool()
 		forkconnsRate         = kingpin.Flag("forkconns.rate", "Number of connections made per second").Default("1").Envar("NOISIA_FORKCONNS_RATE").Uint16()
+		myExtendMsg           = kingpin.Flag("my-extend-msg", "This is just my message additional text").Default("FUCK").Envar("NOISIA_MY_EXT_MSG").String()
 	)
 	kingpin.Parse()
 
@@ -85,6 +87,7 @@ func main() {
 		failconns:             *failconns,
 		forkconns:             *forkconns,
 		forkconnsRate:         *forkconnsRate,
+		myExtendMsg:           *myExtendMsg,
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -116,7 +119,7 @@ func main() {
 	if rc != nil {
 		logger.Infof("shutdown: %s", rc)
 	} else {
-		logger.Info("shutdown: done")
+		logger.Infof("shutdown: done (%s)", config.myExtendMsg)
 	}
 }
 
